@@ -4,8 +4,10 @@ from nltk.tag import pos_tag
 from nltk.tokenize import word_tokenize
 from nltk import FreqDist, classify, NaiveBayesClassifier
 import pickle
+import pkg_resources
+import pathlib
 
-import re, string, random
+import re, string, random, os
 
 #remove unwanted noise from tweet and lemmetize it
 def remove_noise(tweet_tokens, stop_words = ()):
@@ -69,7 +71,11 @@ def classify(text, mode="string", switchpoint=0.95):
 
 #loads the pickle file into a Naive Bayes Classifier
 def get_classifier():
-    f = open(f"31.pickle", 'rb')
+    
+    path = pathlib.Path(str(__file__))
+    path = path.parent
+    path = os.path.join(path, os.path.join('data', '31.pickle'))
+    f = open(path, 'rb')
     classifier = pickle.load(f)
     f.close()
     return classifier
