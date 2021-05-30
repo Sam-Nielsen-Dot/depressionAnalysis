@@ -27,5 +27,5 @@ setup(
         'Programming Language :: Python :: 3.5',
     ],
     include_package_data=True,
-    package_data={'': ['data/*.pickle']},
+    package_data={'': ['depressionAnalysis/data/*.pickle']},
 )
