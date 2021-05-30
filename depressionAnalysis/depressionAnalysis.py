@@ -35,6 +35,14 @@ def remove_noise(tweet_tokens, stop_words = ()):
 
 #classifies the text as either positive for depression or negative for depression. 
 def classify(text, mode="string", switchpoint=0.95, model_id=31):
+
+    switchpoint = float(switchpoint)
+    model_id = int(model_id)
+    if switchpoint < 0 or switchpoint > 1:
+        raise Exception("Switchpoint must be between 0 and 1")
+    if model_id < 0 or model_id > 95:
+        raise Exception("Model id must be between 0 and 95")
+
     classifier = get_classifier(model_id)
 
     custom_tokens = remove_noise(word_tokenize(text))
@@ -72,6 +80,11 @@ def classify(text, mode="string", switchpoint=0.95, model_id=31):
 #loads the pickle file into a Naive Bayes Classifier
 def get_classifier(id):
     
+    
+    id = int(id)
+    if id < 0 or id > 95:
+        raise Exception("Model id must be between 0 and 95")
+
     path = pathlib.Path(str(__file__))
     path = path.parent
     path = os.path.join(path, os.path.join('data', f'{id}.pickle'))
