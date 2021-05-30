@@ -1,3 +1,0 @@
-twint>=2.1.21
-nltk>=3.5
-requests>=2.24.0
