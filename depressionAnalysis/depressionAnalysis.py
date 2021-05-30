@@ -34,8 +34,8 @@ def remove_noise(tweet_tokens, stop_words = ()):
     return cleaned_tokens
 
 #classifies the text as either positive for depression or negative for depression. 
-def classify(text, mode="string", switchpoint=0.95):
-    classifier = get_classifier()
+def classify(text, mode="string", switchpoint=0.95, model_id=31):
+    classifier = get_classifier(model_id)
 
     custom_tokens = remove_noise(word_tokenize(text))
 
@@ -70,11 +70,11 @@ def classify(text, mode="string", switchpoint=0.95):
 
 
 #loads the pickle file into a Naive Bayes Classifier
-def get_classifier():
+def get_classifier(id):
     
     path = pathlib.Path(str(__file__))
     path = path.parent
-    path = os.path.join(path, os.path.join('data', '31.pickle'))
+    path = os.path.join(path, os.path.join('data', f'{id}.pickle'))
     f = open(path, 'rb')
     classifier = pickle.load(f)
     f.close()
