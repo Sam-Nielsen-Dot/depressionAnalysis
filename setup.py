@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='depressionAnalysis',
-    version='0.1.1',    
+    version='0.1.2',    
     description='Detecting depression in social media posts',
     url='https://github.com/Sam-Nielsen-Dot/depressionAnalysis',
     author='Sam Nielsen',
