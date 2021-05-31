@@ -9,6 +9,8 @@ import pathlib
 
 import re, string, random, os
 
+#https://betterscientificsoftware.github.io/python-for-hpc/tutorials/python-pypi-packaging/
+
 #remove unwanted noise from tweet and lemmetize it
 def remove_noise(tweet_tokens, stop_words = ()):
 
@@ -72,7 +74,7 @@ def classify(text, mode="string", switchpoint=0.95, model_id=31, classifier=None
         return return_list
 
     else:
-        raise Exception("Mode must be [string/int/probabilites]")
+        raise Exception("Mode must be [string/int/probabilities]")
             
 
 

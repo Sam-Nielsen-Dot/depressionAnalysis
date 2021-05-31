@@ -1,12 +1,12 @@
 Metadata-Version: 1.1
 Name: depressionAnalysis
-Version: 0.1.2
+Version: 0.1.3
 Summary: Detecting depression in social media posts
 Home-page: https://github.com/Sam-Nielsen-Dot/depressionAnalysis
 Author: Sam Nielsen
 Author-email: lenssimane@gmail.com
 License: MIT
-Description: UNKNOWN
+Description: Read the wiki at https://github.com/Sam-Nielsen-Dot/depressionAnalysis/wiki
 Platform: UNKNOWN
 Classifier: Development Status :: 1 - Planning
 Classifier: Intended Audience :: Healthcare Industry
