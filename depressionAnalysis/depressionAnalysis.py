@@ -36,14 +36,14 @@ def remove_noise(tweet_tokens, stop_words = ()):
     return cleaned_tokens
 
 #classifies the text as either positive for depression or negative for depression. 
-def classify(text, mode="string", switchpoint=0.95, model_id=31, classifier=None):
+def classify(text, mode="string", switchpoint=0.95, model_id=96, classifier=None):
 
     switchpoint = float(switchpoint)
     model_id = int(model_id)
     if switchpoint < 0 or switchpoint > 1:
         raise Exception("Switchpoint must be between 0 and 1")
-    if model_id < 0 or model_id > 95:
-        raise Exception("Model id must be between 0 and 95")
+    if model_id < 0 or model_id > 96:
+        raise Exception("Model id must be between 0 and 96")
 
     if classifier == None:
         classifier = get_classifier(model_id)
@@ -52,19 +52,25 @@ def classify(text, mode="string", switchpoint=0.95, model_id=31, classifier=None
 
     dist = classifier.prob_classify(dict([token, True] for token in custom_tokens))
 
+    positive_acc = dist.prob("Positive")
+    negative_acc = dist.prob("Negative")
+
+    #print(positive_acc)
+    #print(negative_acc)
+
     #string mode returns results as string
     if mode == "string":
-        for label in dist.samples():
-            if label == "Positive" and dist.prob(label) > switchpoint:
-                return "Positive"
-        return "Negative"
+        if positive_acc > switchpoint and positive_acc > negative_acc:
+            return "Positive"
+        else:
+            return "Negative"
 
     #int mode returns results as binary ints
     elif mode =="int":
-        for label in dist.samples():
-            if label == "Positive" and dist.prob(label) > switchpoint:
-                return 1
-        return 0
+        if positive_acc > switchpoint and positive_acc > negative_acc:
+            return 1
+        else:
+            return 0
 
     #probabilities mode returns result as a list of float probabilities
     elif mode=="probabilities":
@@ -83,8 +89,8 @@ def get_classifier(id):
     
     
     id = int(id)
-    if id < 0 or id > 95:
-        raise Exception("Model id must be between 0 and 95")
+    if id < 0 or id > 96:
+        raise Exception("Model id must be between 0 and 96")
 
     path = pathlib.Path(str(__file__))
     path = path.parent
