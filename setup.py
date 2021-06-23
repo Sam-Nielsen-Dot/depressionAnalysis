@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='depressionAnalysis',
-    version='0.1.4',    
+    version='0.2.0',    
     description='Detecting depression in social media posts',
     long_description="Read the wiki at https://github.com/Sam-Nielsen-Dot/depressionAnalysis/wiki",
     url='https://github.com/Sam-Nielsen-Dot/depressionAnalysis',
@@ -12,7 +12,8 @@ setup(
     packages=['depressionAnalysis'],
     install_requires=['twint>=2.1.21',
                     'nltk>=3.5',
-                    'requests>=2.24.0'                  
+                    'requests>=2.24.0',
+                    'pandas>=1.2.4',                  
                       ],
 
     classifiers=[
