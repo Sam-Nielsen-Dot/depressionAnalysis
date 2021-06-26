@@ -105,13 +105,16 @@ def get_classifier(id):
 
 
 #gets a list containing the text of a users twitter posts
-def get_all_posts_for_user(user):
+def get_all_posts_for_user(user, limit=10):
     return_list = []
+    twint.output.tweets_list = []
         
     #configuration
     config = twint.Config()
     config.Username = user
     config.Lang = "en"
+    if limit != None:
+        config.Limit = limit
     config.Hide_output = True
     config.Store_object = True
 
@@ -194,6 +197,14 @@ def analyse_user(user, model_id=96, posts=None, switchpoint=0.8, classification_
     
     #saves collected data in various data formats for further analysis
     if save_as != None:
+        save_dict(user, save_as, return_dict, filename=filename, encoding=encoding)
+
+    #returns data dictionary
+    return return_dict
+
+#saves dictionary of data:
+def save_dict(user, save_as, return_dict, filename=None, encoding="utf-8"):
+    if save_as != None:
 
         if filename == None:
             filename = f"{user}_depression_statistics"
@@ -226,5 +237,10 @@ def analyse_user(user, model_id=96, posts=None, switchpoint=0.8, classification_
         else:
             raise Exception("save_as must be [json/csv/xlsx]")
 
-    #returns data dictionary
-    return return_dict
+#creates directory if it doesn't already exist
+def check_dir(dir_name):
+    dir = os.path.join(os.getcwd(), f"{dir_name}")
+    if not os.path.exists(dir):
+        os.mkdir(dir)
+        return False
+    return True
