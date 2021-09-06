@@ -1,4 +1,4 @@
-twint>=2.1.21
+twint>=2.1.20
 nltk>=3.5
 requests>=2.24.0
 pandas>=1.2.4
